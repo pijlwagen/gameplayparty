@@ -14,7 +14,9 @@
 </head>
 <body>
 @include('partials.header')
-@yield('content')
+<main class="py-4">
+    @yield('content')
+</main>
 @stack('js')
 </body>
 </html>
