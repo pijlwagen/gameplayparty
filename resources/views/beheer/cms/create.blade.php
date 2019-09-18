@@ -12,7 +12,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">Titel</label>
-                        <input type="text" name="title" id="title"
+                        <input type="text" name="title" id="title" value="{{ old('title') }}"
                                class="form-control @error('title') is-invalid @enderror">
                         @error('title')
                         <div class="invalid-feedback">
@@ -21,15 +21,15 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="title">URL</label>
+                        <label for="url">URL</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">https://gameplayparty.nl/</div>
                             </div>
-                            <input type="text" name="title" id="title"
+                            <input type="text" name="url" id="url" value="{{ old('url') }}"
                                    class="form-control @error('title') is-invalid @enderror">
                         </div>
-                        @error('title')
+                        @error('url')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -44,9 +44,24 @@
                         @if ($errors->has('content'))
                             <span class="text-danger" role="alert">
                                         <strong>{{ $errors->first('content') }}</strong>
-                                    </span>
+                            </span>
                         @endif
                         <textarea name="content" id="content" cols="30" rows="10" hidden>{{ old('content') }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="view">Template</label>
+                        <select name="view" id="view"
+                                class="form-control @error('view') is-invalid @enderror">
+                            @foreach($files as $file)
+                                <option value="{{ $file }}">{{ $file }}</option>
+                            @endforeach
+                        </select>
+                        @error('view')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
 
                     <div class="form-group">

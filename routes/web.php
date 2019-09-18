@@ -24,8 +24,14 @@ Route::group(['prefix' => '/'], function () {
 
     Route::group(['prefix' => '/beheer', 'middleware' => ['admin']], function () {
         Route::group(['prefix' => '/cms'], function () {
+            Route::get('/', 'Beheer\CmsController@index')->name('cms.index');
             Route::get('/nieuw', 'Beheer\CmsController@create')->name('cms.nieuw');
-
+            Route::post('/nieuw', 'Beheer\CmsController@store')->name('cms.store');
+            Route::get('/{id}/aanpassen', 'Beheer\CmsController@edit')->name('cms.edit');
+            Route::post('/{id}/aanpassen', 'Beheer\CmsController@update')->name('cms.update');
+            Route::post('/{id}/verwijderen', 'Beheer\CmsController@delete')->name('cms.delete');
         });
     });
+
+    Route::get('{path}', 'Beheer\CmsController@handle');
 });

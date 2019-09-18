@@ -12,7 +12,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">Titel</label>
-                        <input type="text" name="title" id="title" value="{{ old('title') }}"
+                        <input type="text" name="title" id="title" value="{{ old('title', $page->title) }}"
                                class="form-control @error('title') is-invalid @enderror">
                         @error('title')
                         <div class="invalid-feedback">
@@ -26,7 +26,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">https://gameplayparty.nl/</div>
                             </div>
-                            <input type="text" name="url" id="url" value="{{ old('url') }}"
+                            <input type="text" name="url" id="url" value="{{ old('url', $page->url) }}"
                                    class="form-control @error('title') is-invalid @enderror">
                         </div>
                         @error('url')
@@ -39,14 +39,14 @@
                         <label>Content</label>
                         <div id="toolbar"></div>
                         <div id="editor">
-                            {!! old('content') !!}
+                            {!! old('content', $page->content) !!}
                         </div>
                         @if ($errors->has('content'))
                             <span class="text-danger" role="alert">
-                                        <strong>{{ $errors->first('content') }}</strong>
+                                        <strong>{{ $errors->first('content', $page->content) }}</strong>
                             </span>
                         @endif
-                        <textarea name="content" id="content" cols="30" rows="10" hidden>{{ old('content') }}</textarea>
+                        <textarea name="content" id="content" cols="30" rows="10" hidden>{{ old('content', $page->content) }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -54,7 +54,7 @@
                         <select name="view" id="view"
                                 class="form-control @error('view') is-invalid @enderror">
                             @foreach($files as $file)
-                                <option value="{{ $file }}">{{ $file }}</option>
+                                <option value="{{ $file }}" {{ $file == old('view', $page->view) ? 'selected' : '' }}>{{ $file }}</option>
                             @endforeach
                         </select>
                         @error('view')
@@ -66,7 +66,8 @@
 
                     <div class="form-group">
                         <a href="#" class="btn btn-primary"
-                           onclick="event.preventDefault(); $('#content').val(editor.root.innerHTML); $('#submit-form').submit();">Toevoegen</a>
+                           onclick="event.preventDefault(); $('#content').val(editor.root.innerHTML); $('#submit-form').submit();">Aanpassen</a>
+                        <a href="#" class="btn btn-warning" onclick="javascript:history.back()">Terug</a>
                     </div>
                 </form>
             </div>

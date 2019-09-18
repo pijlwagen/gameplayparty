@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use App\Models\Role;
+use App\Models\UserRole;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
