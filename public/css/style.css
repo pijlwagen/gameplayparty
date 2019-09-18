@@ -5,12 +5,13 @@
 }
 
 footer {
+    min-height: 200px;
     color: #ffffff;
     background: #2c3e50;
 }
 
 main {
-    margin-top: 56px;
+    margin-top: 76px;
 }
 
 @media (min-width: 1400px) {
