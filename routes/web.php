@@ -33,6 +33,7 @@ Route::group(['prefix' => '/'], function () {
         });
         Route::group(['prefix' => '/bioscopen'], function () {
             Route::get('/', 'Beheer\BioscoopController@index')->name('bios.index');
+            Route::get('/nieuw', 'Beheer\BioscoopController@create')->name('bios.create');
         });
     });
 

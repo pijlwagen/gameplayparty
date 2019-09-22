@@ -8,7 +8,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <a href="{{ route('cms.nieuw') }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Nieuwe pagina</a>
+                <a href="{{ route('bios.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Nieuwe bioscoop</a>
                 <table class="table table-striped table-hover table-borderless">
                     <thead>
                     <tr>

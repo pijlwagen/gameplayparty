@@ -32,8 +32,6 @@ class BioscoopController extends Controller
         return view('beheer.bios.create');
     }
 
-
-
     public function delete(Request $request)
     {
         $page = Page::find($request->id);

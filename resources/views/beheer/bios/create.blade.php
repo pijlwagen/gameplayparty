@@ -11,62 +11,33 @@
                 <form action="" method="POST" id="submit-form">
                     @csrf
                     <div class="form-group">
-                        <label for="title">Titel</label>
-                        <input type="text" name="title" id="title" value="{{ old('title') }}"
-                               class="form-control @error('title') is-invalid @enderror">
-                        @error('title')
+                        <label for="title">Naam</label>
+                        <input type="text" name="name" id="name" value="{{ old('name') }}"
+                               class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="url">URL</label>
+                        <label for="slug">Slug</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
-                                <div class="input-group-text">https://gameplayparty.nl/</div>
+                                <div class="input-group-text">https://gameplayparty.nl/bioscopen/</div>
                             </div>
-                            <input type="text" name="url" id="url" value="{{ old('url') }}"
-                                   class="form-control @error('title') is-invalid @enderror">
+                            <input type="text" name="slug" id="slug" value="{{ old('slug') }}"
+                                   class="form-control @error('slug') is-invalid @enderror">
                         </div>
-                        @error('url')
+                        <small class="text-muted">Dit is hoe de bioscoop in de url komt te staan.</small>
+                        @error('slug')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label>Content</label>
-                        <div id="toolbar"></div>
-                        <div id="editor">
-                            {!! old('content') !!}
-                        </div>
-                        @if ($errors->has('content'))
-                            <span class="text-danger" role="alert">
-                                        <strong>{{ $errors->first('content') }}</strong>
-                            </span>
-                        @endif
-                        <textarea name="content" id="content" cols="30" rows="10" hidden>{{ old('content') }}</textarea>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="view">Template</label>
-                        <select name="view" id="view"
-                                class="form-control @error('view') is-invalid @enderror">
-                            @foreach($files as $file)
-                                <option value="{{ $file }}">{{ $file }}</option>
-                            @endforeach
-                        </select>
-                        @error('view')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <a href="#" class="btn btn-primary"
-                           onclick="event.preventDefault(); $('#content').val(editor.root.innerHTML); $('#submit-form').submit();">Toevoegen</a>
                     </div>
                 </form>
             </div>
