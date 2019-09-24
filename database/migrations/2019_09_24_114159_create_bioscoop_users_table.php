@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBioscoopOpeningstijdenTable extends Migration
+class CreateBioscoopUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateBioscoopOpeningstijdenTable extends Migration
      */
     public function up()
     {
-        Schema::create('bioscoop_openingstijden', function (Blueprint $table) {
+        Schema::create('bioscoop_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('bioscoop_id');
-            $table->string('day', 3);
+            $table->bigInteger('user_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateBioscoopOpeningstijdenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bioscoop_openingstijden');
+        Schema::dropIfExists('bioscoop_users');
     }
 }

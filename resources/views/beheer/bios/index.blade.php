@@ -14,6 +14,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Naam</th>
+                        <th>Gebruikers</th>
                         <th>Stad</th>
                         <th>Acties</th>
                     </tr>
@@ -23,11 +24,14 @@
                         <tr>
                             <th>{{ $bios->id }}</th>
                             <td>{{ $bios->name }}</td>
-                            <td>/{{ $bios->city }}</td>
+                            <td>{{ $bios->users()->count() }}</td>
+                            <td>{{ $bios->city }}</td>
                             <td>
-                                {{--<a href="{{ route('cms.edit', $page) }}" class="mr-2"><i class="fas fa-edit"></i></a>--}}
-                                {{--<a href="/{{ $page->url }}" class="mr-2"><i class="fas fa-eye text-info"></i></a>--}}
-                                {{--<a href="#" onclick="event.preventDefault(); $('#delete-{{ $page->id }}').submit()"><i class="fas fa-trash text-danger"></i></a>--}}
+                                <a href="{{ route('bios.edit', $bios) }}" class="mr-2"><i class="fas fa-edit"></i></a>
+                                {{--<a href="/{{ $bios->url }}" class="mr-2"><i class="fas fa-eye text-info"></i></a>--}}
+                                @if (Auth::user()->isAdmin())
+                                    <a href="#" onclick="event.preventDefault(); $('#delete-{{ $bios->id }}').submit()"><i class="fas fa-trash text-danger"></i></a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -36,10 +40,10 @@
             </div>
         </div>
     </div>
-    {{--@foreach ($pages as $page)--}}
-{{--        <form action="{{ route('cms.delete', $page) }}" id="delete-{{ $page->id }}" method="POST">--}}
-            {{--@csrf--}}
-            {{--<input type="text" value="{{ $page->id }}" id="page" hidden>--}}
-        {{--</form>--}}
-    {{--@endforeach--}}
+    @foreach ($bioscopen as $bios)
+        <form action="{{ route('bios.delete', $bios) }}" id="delete-{{ $bios->id }}" method="POST">
+            @csrf
+            <input type="text" value="{{ $bios->id }}" id="page" hidden>
+        </form>
+    @endforeach
 @stop

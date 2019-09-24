@@ -12,7 +12,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">Naam</label>
-                        <input type="text" name="name" id="name" value="{{ old('name') }}"
+                        <input type="text" name="name" id="name" value="{{ old('name', $bios->name) }}"
                                class="form-control @error('name') is-invalid @enderror">
                         @error('name')
                         <div class="invalid-feedback">
@@ -26,7 +26,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">https://gameplayparty.nl/bioscopen/</div>
                             </div>
-                            <input type="text" name="slug" id="slug" value="{{ old('slug') }}"
+                            <input type="text" name="slug" id="slug" value="{{ old('slug', $bios->slug) }}"
                                    class="form-control @error('slug') is-invalid @enderror">
                             @error('slug')
                             <div class="invalid-feedback">
@@ -39,7 +39,7 @@
                     <div class="form-group row">
                         <div class="col-md-5">
                             <label for="city">Stad</label>
-                            <input type="text" name="city" id="city" value="{{ old('city') }}"
+                            <input type="text" name="city" id="city" value="{{ old('city', $bios->city) }}"
                                    class="form-control @error('city') is-invalid @enderror">
                             @error('city')
                             <div class="invalid-feedback">
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-5">
                             <label for="address">Adres</label>
-                            <input type="text" name="address" id="address" value="{{ old('address') }}"
+                            <input type="text" name="address" id="address" value="{{ old('address', $bios->address) }}"
                                    class="form-control @error('address') is-invalid @enderror">
                             @error('address')
                             <div class="invalid-feedback">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="col-md-2">
                             <label for="zipcode">Postcode</label>
-                            <input type="text" name="zipcode" id="zipcode" value="{{ old('zipcode') }}"
+                            <input type="text" name="zipcode" id="zipcode" value="{{ old('zipcode', $bios->zip) }}"
                                    class="form-control @error('zipcode') is-invalid @enderror">
                             <small class="text-muted">Geen spaties</small>
                             @error('zipcode')
@@ -75,7 +75,7 @@
                         <div class="card">
                             <div id="toolbar"></div>
                             <div id="editor">
-                                {!! old('content') !!}
+                                {!! old('content', $bios->description) !!}
                             </div>
                             @if ($errors->has('content'))
                                 <span class="text-danger" role="alert">
@@ -83,7 +83,7 @@
                             </span>
                             @endif
                             <textarea name="content" id="content" cols="30" rows="10"
-                                      hidden>{{ old('content') }}</textarea>
+                                      hidden>{{ old('content', $bios->description) }}</textarea>
                         </div>
                     </div>
                     <hr>
@@ -92,8 +92,9 @@
                             <label for="users">Gebruikers</label>
                             <select name="users[]" id="users" value="{{ old('users') }}" multiple
                                     class="form-control @error('users') is-invalid @enderror">
+                                @php($busers = $bios->users())
                                 @foreach($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    <option value="{{ $user->id }}" {{ $busers->where('user_id', $user->id)->first() ? 'selected' : '' }}>{{ $user->name }}</option>
                                 @endforeach
                             </select>
                             @error('users')
@@ -105,7 +106,7 @@
                     @endif
                     <div class="form-group">
                         <a href="#" class="btn btn-primary"
-                           onclick="event.preventDefault(); $('#content').val(editor.root.innerHTML); $('#submit-form').submit();">Toevoegen</a>
+                           onclick="event.preventDefault(); $('#content').val(editor.root.innerHTML); $('#submit-form').submit();">Opslaan</a>
                     </div>
                 </form>
             </div>

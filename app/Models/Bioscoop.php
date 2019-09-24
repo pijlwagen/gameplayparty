@@ -16,6 +16,10 @@ class Bioscoop extends Model
      * Laravel will be able to edit data in these columns
      * @var array
      */
-    protected $fillable = ['name', 'city', 'zip', 'address', 'description'];
+    protected $fillable = ['name', 'city', 'zip', 'address', 'description', 'slug'];
 
+    public function users()
+    {
+        return $this->hasMany(Editor::class, 'bioscoop_id', 'id')->get();
+    }
 }

@@ -9,13 +9,26 @@
         <ul class="navbar-nav ml-auto">
             @guest
             @else
-                @if (Auth::user()->roles()->where('name', 'Beheerder')->first())
+                @if (Auth::user()->isAdmin() || Auth::user()->isEditor())
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Website beheer
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('cms.index') }}">Content Management Systeem</a>
+                            @if (Auth::user()->isAdmin())
+                                <a class="dropdown-item" href="{{ route('cms.index') }}">Content Management Systeem</a>
+                            @endif
+                                <a class="dropdown-item" href="{{ route('bios.index') }}">Bioscopen</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                Uitloggen
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                 @endif

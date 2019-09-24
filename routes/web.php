@@ -13,6 +13,7 @@
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/bioscopen/{slug}', 'BioscoopController@view')->name('bios.show');
 
     Route::group(['prefix' => '/auth'], function () {
         Route::get('inloggen', 'Auth\LoginController@showLoginForm')->name('login');
@@ -34,6 +35,10 @@ Route::group(['prefix' => '/'], function () {
         Route::group(['prefix' => '/bioscopen'], function () {
             Route::get('/', 'Beheer\BioscoopController@index')->name('bios.index');
             Route::get('/nieuw', 'Beheer\BioscoopController@create')->name('bios.create');
+            Route::post('/nieuw', 'Beheer\BioscoopController@store')->name('bios.store');
+            Route::get('/{id}/aanpassen', 'Beheer\BioscoopController@edit')->name('bios.edit');
+            Route::post('/{id}/aanpassen', 'Beheer\BioscoopController@update')->name('bios.update');
+            Route::post('/{id}/verwijderen', 'Beheer\BioscoopController@delete')->middleware('admin')->name('bios.delete');
         });
     });
 
