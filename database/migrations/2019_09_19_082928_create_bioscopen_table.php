@@ -19,6 +19,7 @@ class CreateBioscopenTable extends Migration
             $table->string('city', 256);
             $table->string('address', 548);
             $table->string('zip', 6);
+            $table->string('phone', 256);
             $table->longText('description');
             $table->string('slug', 256);
             $table->timestamps();

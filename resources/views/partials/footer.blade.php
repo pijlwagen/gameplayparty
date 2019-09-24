@@ -4,7 +4,8 @@
             <div class="col-md-4">
                 <h3>Navigatie</h3>
                 <ul class="list-unstyled">
-                    <li><a href="/over-ons">Over GamePlayParty</a></li>
+                    <li><a href="/over-ons"><i class="fas fa-film"></i> Bioscopen</a></li>
+                    <li><a href="/over-ons"><i class="far fa-address-card"></i> Over ons</a></li>
                 </ul>
             </div>
             <div class="col-md-4">

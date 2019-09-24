@@ -8,7 +8,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <form action="" method="POST" id="submit-form">
+                <form action="" method="POST" id="submit-form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="title">Naam</label>
@@ -69,6 +69,16 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="phone">Telefoon</label>
+                        <input type="text" name="phone" id="phone" value="{{ old('phone', $bios->phone) }}"
+                               class="form-control @error('phone') is-invalid @enderror">
+                        @error('phone')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
                     <hr>
                     <div class="form-group">
                         <label>Omschrijving</label>
@@ -89,7 +99,7 @@
                     <hr>
                     <div class="form-group">
                         <label for="photo">Foto</label>
-                        <input type="file" name="photo" id="photo" value="{{ old('photo') }}"
+                        <input type="file" name="photo" id="photo"
                                class="form-control-file @error('photo') is-invalid @enderror">
                         @error('photo')
                         <div class="invalid-feedback">
@@ -153,7 +163,7 @@
             [{'list': 'ordered'}, {'list': 'bullet'}],
 
             [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
-            [{'header': [1, 2, 3, 4, 5, 6, false]}],
+            [{'header': [1, 2, 3, 4, 5, 6, false]}, {'align': []}],
 
             ['clean']                                         // remove formatting button
         ];
