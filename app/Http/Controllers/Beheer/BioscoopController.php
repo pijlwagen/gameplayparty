@@ -55,6 +55,7 @@ class BioscoopController extends Controller
             "slug" => "required",
             "name" => "required",
             "photo" => "required|image",
+            "phone" => "required",
         ]);
 
         $bios = Bioscoop::create([
@@ -64,6 +65,7 @@ class BioscoopController extends Controller
             "address" => $request->input("address"),
             "description" => $request->input("content"),
             "name" => $request->input("name"),
+            "phone" => $request->input("phone"),
         ]);
 
         BioscoopPhoto::create([
@@ -105,6 +107,8 @@ class BioscoopController extends Controller
             "content" => "required",
             "slug" => "required",
             "name" => "required",
+            "photo" => "image",
+            "phone" => "required",
         ]);
 
         $bios = Bioscoop::find($request->id);
@@ -116,8 +120,24 @@ class BioscoopController extends Controller
             "city" => $request->input("city"),
             "address" => $request->input("address"),
             "description" => $request->input("content"),
+            "phone" => $request->input("phone"),
             "name" => $request->input("name"),
         ]);
+
+        if ($request->file('photo')) {
+            $photo = BioscoopPhoto::where('bioscoop_id', $bios->id)->first();
+            if ($photo) {
+                Storage::disk('images')->delete($photo->file);
+                $photo->update([
+                    "file" => Storage::disk('images')->put('/', $request->file('photo'))
+                ]);
+            } else {
+                BioscoopPhoto::create([
+                    "bioscoop_id" => $bios->id,
+                    "file" => Storage::disk('images')->put('/', $request->file('photo'))
+                ]);
+            }
+        }
 
         if (Auth::user()->isAdmin()) {
             foreach ($bios->users() as $user) {
