@@ -96,4 +96,13 @@ class CmsController extends Controller
         session()->flash('success', "Pagina <b>{$page->title}</b> is succesvol aangepast.");
         return redirect(route('cms.index'));
     }
+
+    public function delete(Request $request)
+    {
+        $page = Page::find($request->id);
+        if (!$page) return abort(404);
+        $page->delete();
+        session()->flash('success', "Pagina <b>{$page->title}</b> is succesvol verwijderd.");
+        return redirect(route('cms.index'));
+    }
 }

@@ -13,6 +13,7 @@
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/bioscopen/{slug}', 'Beheer\BioscoopController@view')->name('bios.show');
 
     Route::group(['prefix' => '/auth'], function () {
         Route::get('inloggen', 'Auth\LoginController@showLoginForm')->name('login');
@@ -22,14 +23,22 @@ Route::group(['prefix' => '/'], function () {
         Route::post('registreren', 'Auth\RegisterController@register');
     });
 
-    Route::group(['prefix' => '/beheer', 'middleware' => ['admin']], function () {
-        Route::group(['prefix' => '/cms'], function () {
+    Route::group(['prefix' => '/beheer', 'middleware' => ['editor']], function () {
+        Route::group(['prefix' => '/cms', 'middleware' => ['admin']], function () {
             Route::get('/', 'Beheer\CmsController@index')->name('cms.index');
             Route::get('/nieuw', 'Beheer\CmsController@create')->name('cms.nieuw');
             Route::post('/nieuw', 'Beheer\CmsController@store')->name('cms.store');
             Route::get('/{id}/aanpassen', 'Beheer\CmsController@edit')->name('cms.edit');
             Route::post('/{id}/aanpassen', 'Beheer\CmsController@update')->name('cms.update');
             Route::post('/{id}/verwijderen', 'Beheer\CmsController@delete')->name('cms.delete');
+        });
+        Route::group(['prefix' => '/bioscopen'], function () {
+            Route::get('/', 'Beheer\BioscoopController@index')->name('bios.index');
+            Route::get('/nieuw', 'Beheer\BioscoopController@create')->name('bios.create');
+            Route::post('/nieuw', 'Beheer\BioscoopController@store')->name('bios.store');
+            Route::get('/{id}/aanpassen', 'Beheer\BioscoopController@edit')->name('bios.edit');
+            Route::post('/{id}/aanpassen', 'Beheer\BioscoopController@update')->name('bios.update');
+            Route::post('/{id}/verwijderen', 'Beheer\BioscoopController@delete')->middleware('admin')->name('bios.delete');
         });
     });
 
