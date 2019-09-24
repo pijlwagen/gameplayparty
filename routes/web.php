@@ -13,7 +13,7 @@
 
 Route::group(['prefix' => '/'], function () {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/bioscopen/{slug}', 'BioscoopController@view')->name('bios.show');
+    Route::get('/bioscopen/{slug}', 'Beheer\BioscoopController@view')->name('bios.show');
 
     Route::group(['prefix' => '/auth'], function () {
         Route::get('inloggen', 'Auth\LoginController@showLoginForm')->name('login');

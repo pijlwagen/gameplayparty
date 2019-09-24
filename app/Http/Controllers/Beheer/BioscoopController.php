@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Beheer;
 
 use App\Models\Bioscoop;
+use App\Models\BioscoopPhoto;
 use App\Models\Editor;
 use App\Models\Page;
 use App\Models\Role;
@@ -11,12 +12,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BioscoopController extends Controller
 {
     public function view(Request $request)
     {
-        $bios = Page::where('slug', $request->slug)->first();
+        $bios = Bioscoop::where('slug', $request->slug)->first();
         if (!$bios) return abort(404);
         return view("bioscoop", [
             'bios' => $bios
@@ -52,6 +54,7 @@ class BioscoopController extends Controller
             "content" => "required",
             "slug" => "required",
             "name" => "required",
+            "photo" => "required|image",
         ]);
 
         $bios = Bioscoop::create([
@@ -61,6 +64,11 @@ class BioscoopController extends Controller
             "address" => $request->input("address"),
             "description" => $request->input("content"),
             "name" => $request->input("name"),
+        ]);
+
+        BioscoopPhoto::create([
+            "bioscoop_id" => $bios->id,
+            "file" => Storage::disk('images')->put('/', $request->file('photo'))
         ]);
 
         $users = $request->input("users");
@@ -102,10 +110,6 @@ class BioscoopController extends Controller
         $bios = Bioscoop::find($request->id);
         if (!$bios) return abort(404);
 
-        foreach ($bios->users() as $user) {
-            $user->delete();
-        }
-
         $bios->update([
             "slug" => $request->input("slug"),
             "zip" => $request->input("zipcode"),
@@ -115,13 +119,19 @@ class BioscoopController extends Controller
             "name" => $request->input("name"),
         ]);
 
-        $users = $request->input("users");
-        if ($users) {
-            foreach ($users as $user) {
-                Editor::create([
-                    "bioscoop_id" => $bios->id,
-                    "user_id" => $user,
-                ]);
+        if (Auth::user()->isAdmin()) {
+            foreach ($bios->users() as $user) {
+                $user->delete();
+            }
+
+            $users = $request->input("users");
+            if ($users) {
+                foreach ($users as $user) {
+                    Editor::create([
+                        "bioscoop_id" => $bios->id,
+                        "user_id" => $user,
+                    ]);
+                }
             }
         }
 
@@ -135,6 +145,9 @@ class BioscoopController extends Controller
         if (!$bios) return abort(404);
         foreach ($bios->users() as $relation) {
             $relation->delete(); // delete relation that connects the user to the bios
+        }
+        foreach ($bios->photos() as $relation) {
+            $relation->delete(); // delete relation that connects the photos to the bios
         }
         $bios->delete();
         session()->flash('success', "Bioscoop <b>{$bios->name}</b> is succesvol verwijderd.");

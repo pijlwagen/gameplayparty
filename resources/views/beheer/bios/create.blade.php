@@ -8,7 +8,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <form action="" method="POST" id="submit-form">
+                <form action="" method="POST" id="submit-form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="title">Naam</label>
@@ -85,6 +85,17 @@
                             <textarea name="content" id="content" cols="30" rows="10"
                                       hidden>{{ old('content') }}</textarea>
                         </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="photo">Foto</label>
+                        <input type="file" name="photo" id="photo" value="{{ old('photo') }}"
+                               class="form-control-file @error('photo') is-invalid @enderror">
+                        @error('photo')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <hr>
                     @if (Auth::user()->isAdmin())

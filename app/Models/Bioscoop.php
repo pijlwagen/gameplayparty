@@ -22,4 +22,9 @@ class Bioscoop extends Model
     {
         return $this->hasMany(Editor::class, 'bioscoop_id', 'id')->get();
     }
+
+    public function photos()
+    {
+        return $this->hasMany(BioscoopPhoto::class, 'bioscoop_id', 'id')->get();
+    }
 }

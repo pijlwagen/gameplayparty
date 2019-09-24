@@ -87,6 +87,18 @@
                         </div>
                     </div>
                     <hr>
+                    <div class="form-group">
+                        <label for="photo">Foto</label>
+                        <input type="file" name="photo" id="photo" value="{{ old('photo') }}"
+                               class="form-control-file @error('photo') is-invalid @enderror">
+                        @error('photo')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                        <img src="{{ asset('images/'.$bios->photos()->first()->file) }}" style="max-width: 50%" alt="Foto" class="img-fluid my-3">
+                    </div>
+                    <hr>
                     @if (Auth::user()->isAdmin())
                         <div class="form-group">
                             <label for="users">Gebruikers</label>
@@ -105,8 +117,9 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <a href="#" class="btn btn-primary"
+                        <a href="#" class="btn btn-primary mr-3"
                            onclick="event.preventDefault(); $('#content').val(editor.root.innerHTML); $('#submit-form').submit();">Opslaan</a>
+                        <a href="javascript:history.back()" class="btn btn-warning">Terug</a>
                     </div>
                 </form>
             </div>
