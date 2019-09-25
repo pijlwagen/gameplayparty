@@ -13,7 +13,7 @@
     <div class="container">
         {!! $page->render() !!}
         <div class="row my-3">
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <div class="card ad shadow-lg">
                     <div class="card-body text-center">
                         <h1>1 uur</h1>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <div class="card ad shadow-lg">
                     <div class="card-body text-center">
                         <h1>2 uur</h1>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <div class="card ad shadow-lg">
                     <div class="card-body text-center">
                         <h1>3 uur</h1>

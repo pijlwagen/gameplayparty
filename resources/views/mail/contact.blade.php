@@ -154,12 +154,26 @@
                         <table>
                             <tr>
                                 <th>Naam:</th>
-                                <td></td>
+                                <td>{{ $contact->input('name') }}</td>
+                            </tr>
+                            <tr>
+                                <th>E-mail:</th>
+                                <td>{{ $contact->input('email') }}</td>
+                            </tr>
+                            @if ($contact->input('phone'))
+                                <tr>
+                                    <th>Telefoon:</th>
+                                    <td>{{ $contact->input('phone') }}</td>
+                                </tr>
+                            @endif
+                            <tr>
+                                <th>Bericht:</th>
                             </tr>
                         </table>
                     </td>
                 </tr>
             </table>
+            <p>{{ $contact->input('message') }}</p>
         </td>
     </tr>
 </table>

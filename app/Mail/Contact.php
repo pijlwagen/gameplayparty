@@ -28,8 +28,8 @@ class Contact extends Mailable
      */
     public function build()
     {
-        return $this->from('noreply@michel3951.com')->subject('Vraagbaak - Uw vraag is beantwoord')->view('mail.reply')->with([
-            'question' => $this->question,
+        return $this->from('noreply@gameplayparty.nl')->subject('GamePlayParty - Contact Formulier')->view('mail.contact')->with([
+            'contact' => $this->contact,
         ]);
     }
 }
