@@ -4,6 +4,10 @@
     flex-direction: column;
 }
 
+body, html {
+    background: #ecf0f1;
+}
+
 footer {
     min-height: 200px;
     color: #ffffff;
@@ -18,4 +22,39 @@ main {
     footer {
         background: #2c3e50 url("/logo.svg") no-repeat;
     }
+}
+
+@media (max-width: 576px) {
+    .bios {
+
+    }
+}
+
+.jumbotron-home-bg {
+    margin-top: -100px;
+    background: #333 url(/images/banner.png) top center no-repeat;
+    height: 400px;
+    background-size: cover;
+}
+
+/*quil.js*/
+.ql-align-center {
+    text-align: center;
+}
+
+.ql-align-left {
+    text-align: left;
+}
+
+.ql-align-right {
+    text-align: right;
+}
+.ql-align-justify {
+    text-align: justify;
+}
+
+.hover:hover {
+    -webkit-transform: scale(1.10);
+    -ms-transform: scale(1.10);
+    transform: scale(1.10);
 }

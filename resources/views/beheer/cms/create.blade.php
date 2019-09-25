@@ -37,16 +37,19 @@
                     </div>
                     <div class="form-group">
                         <label>Content</label>
-                        <div id="toolbar"></div>
-                        <div id="editor">
-                            {!! old('content') !!}
+                        <div class="card">
+                            <div id="toolbar"></div>
+                            <div id="editor">
+                                {!! old('content') !!}
+                            </div>
+                            @if ($errors->has('content'))
+                                <span class="text-danger" role="alert">
+                                            <strong>{{ $errors->first('content') }}</strong>
+                                </span>
+                            @endif
+                            <textarea name="content" id="content" cols="30" rows="10"
+                                      hidden>{{ old('content') }}</textarea>
                         </div>
-                        @if ($errors->has('content'))
-                            <span class="text-danger" role="alert">
-                                        <strong>{{ $errors->first('content') }}</strong>
-                            </span>
-                        @endif
-                        <textarea name="content" id="content" cols="30" rows="10" hidden>{{ old('content') }}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -93,7 +96,7 @@
             [{'list': 'ordered'}, {'list': 'bullet'}],
 
             [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
-            [{'header': [1, 2, 3, 4, 5, 6, false]}],
+            [{'header': [1, 2, 3, 4, 5, 6, false]}, {'align': []}], ,
 
             ['clean']                                         // remove formatting button
         ];

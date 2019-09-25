@@ -37,25 +37,32 @@
                     </div>
                     <div class="form-group">
                         <label>Content</label>
-                        <div id="toolbar"></div>
-                        <div id="editor">
-                            {!! old('content', $page->content) !!}
-                        </div>
-                        @if ($errors->has('content'))
-                            <span class="text-danger" role="alert">
+                        <div class="card">
+                            <div id="toolbar"></div>
+                            <div id="editor">
+                                {!! old('content', $page->content) !!}
+                            </div>
+                            @if ($errors->has('content'))
+                                <span class="text-danger" role="alert">
                                         <strong>{{ $errors->first('content', $page->content) }}</strong>
                             </span>
-                        @endif
-                        <textarea name="content" id="content" cols="30" rows="10" hidden>{{ old('content', $page->content) }}</textarea>
+                            @endif
+                            <textarea name="content" id="content" cols="30" rows="10"
+                                      hidden>{{ old('content', $page->content) }}</textarea>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="view">Template</label>
-                        <select name="view" id="view"
-                                class="form-control @error('view') is-invalid @enderror">
-                            @foreach($files as $file)
-                                <option value="{{ $file }}" {{ $file == old('view', $page->view) ? 'selected' : '' }}>{{ $file }}</option>
-                            @endforeach
+                        <select name="view" id="view" {{ $page->url === 'home' ? 'readonly' : '' }}
+                        class="form-control @error('view') is-invalid @enderror">
+                            @if ($page->url === 'home')
+                                <option value="welcome" selected>welcome</option>
+                            @else
+                                @foreach($files as $file)
+                                    <option value="{{ $file }}" {{ $file == old('view', $page->view) ? 'selected' : '' }}>{{ $file }}</option>
+                                @endforeach
+                            @endif
                         </select>
                         @error('view')
                         <div class="invalid-feedback">
@@ -94,7 +101,7 @@
             [{'list': 'ordered'}, {'list': 'bullet'}],
 
             [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
-            [{'header': [1, 2, 3, 4, 5, 6, false]}],
+            [{'header': [1, 2, 3, 4, 5, 6, false]}, {'align': []}],
 
             ['clean']                                         // remove formatting button
         ];

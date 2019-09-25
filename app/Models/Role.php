@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Role extends Model
 {
@@ -25,6 +26,6 @@ class Role extends Model
 
     public function users()
     {
-        return $this->hasManyThrough(User::class, UserRole::class, 'role_id', 'user_id', 'id')->get();
+        return $this->hasManyThrough(User::class, UserRole::class, 'role_id', 'id', 'id', 'user_id')->get();
     }
 }

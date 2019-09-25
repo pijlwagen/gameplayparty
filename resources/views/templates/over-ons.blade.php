@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
+@push('head')
+    <title>{{ env('APP_NAME') }} - {{ $page->title }}</title>
+@endpush
+
 @section('content')
+<<<<<<< HEAD
     <div class="container">
     <img src="
 https://dummyimage.com/2560x300/000600/fff" class="rounded mx-auto d-block img-fluid" alt="...">
@@ -20,6 +25,11 @@ https://dummyimage.com/800x600/000600/fff" class="rounded mx-auto d-block" alt="
     <br>
     <img src=""> 
     <br>
+=======
+    <div class="container" id="background">
+        <img src="{{ asset('logo.svg') }}" class="rounded mr-auto d-block img-fluid" alt="...">
+        {!! $page->render() !!}
+>>>>>>> d91d70e97355ee4c6d97eaed393bdd7863a0e108
     </div>
 
 @stop
