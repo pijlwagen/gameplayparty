@@ -5,7 +5,7 @@
 }
 
 body, html {
-    background: #ecf0f1;
+    background: #ffffff;
 }
 
 footer {
@@ -35,6 +35,17 @@ main {
     background: #333 url(/images/banner.jpg) top center no-repeat;
     height: 400px;
     background-size: cover;
+}
+
+.ad {
+    border: none;
+    border-radius: .75rem;
+    color: #fff;
+    background: #0652DD;
+}
+
+.ad:nth-child(odd) {
+    background: #1B1464;
 }
 
 /*quil.js*/
