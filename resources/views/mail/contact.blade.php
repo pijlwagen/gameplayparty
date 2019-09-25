@@ -170,10 +170,10 @@
                                 <th>Bericht:</th>
                             </tr>
                         </table>
+                        <p>{{ $contact->input('message') }}</p>
                     </td>
                 </tr>
             </table>
-            <p>{{ $contact->input('message') }}</p>
         </td>
     </tr>
 </table>
