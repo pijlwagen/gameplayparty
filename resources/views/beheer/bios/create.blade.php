@@ -69,6 +69,16 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="phone">Telefoon</label>
+                        <input type="text" name="phone" id="phone" value="{{ old('phone') }}"
+                               class="form-control @error('phone') is-invalid @enderror">
+                        @error('phone')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
                     <hr>
                     <div class="form-group">
                         <label>Omschrijving</label>
