@@ -34,7 +34,7 @@
                                 <a href="{{ route('bios.show', $bios->slug) }}" class="mr-2"><i
                                             class="fas fa-eye text-info"></i></a>
                                 @if (Auth::user()->isAdmin())
-                                    <a href="#" onclick="event.preventDefault(); $('#delete-{{ $bios->id }}').submit()"><i
+                                    <a href="#" onclick="event.preventDefault(); return confirm('Weet u zeker dat u deze pagina wilt verwijderen?') ? $('#delete-{{ $bios->id }}').submit() : false"><i
                                                 class="fas fa-trash text-danger"></i></a>
                                 @endif
                             </td>
