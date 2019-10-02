@@ -11,7 +11,9 @@
             @foreach(\App\Models\Bioscoop::all() as $bios)
                 <div class="col-lg-4 col-sm-6 mb-3 col-10 mx-auto mx-sm-0 hover text-center">
                     <a href="{{ route('bios.show', $bios->slug) }}">
-                        <img src="{{ asset('images/' . $bios->photos()->first()->file) }}" class="img-fluid rounded" alt="">
+                        <img src="{{ asset('images/' . $bios->photos()->first()->file) }}"
+                             style="max-width: 200px; min-width:200px; max-height: 175px; min-height: 175px; object-fit: cover;"
+                             class="img-fluid rounded" alt="">
                         <h2>{{ $bios->name }}</h2>
                     </a>
                 </div>

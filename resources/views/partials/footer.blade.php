@@ -6,6 +6,9 @@
                 <ul class="list-unstyled">
                     <li><a href="/bioscopen"><i class="fas fa-film"></i> Bioscopen</a></li>
                     <li><a href="/over-ons"><i class="far fa-address-card"></i> Over ons</a></li>
+                    <li><a href="/contact"><i class="far fa-envelope"></i> Contact</a></li>
+                    <li><a href="/privacy-en"><i class="fas fa-user-secret"></i>  Privacy Policy</a></li>
+                    <li><a href="/terms"><i class="fas fa-bookmark"></i> Terms & Conditions</a></li>
                 </ul>
             </div>
             <div class="col-md-4">

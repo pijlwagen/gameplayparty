@@ -24,7 +24,7 @@
                             <li><i class="fa fa-check text-primary"></i> Dolby 5.1</li>
                             <li><i class="fa fa-check text-primary"></i> Dolby 7.1</li>
                             <li><i class="fa fa-times text-danger"></i> Laser Ultra</li>
-                            <li><i class="fa fa-times text-danger"></i> Amtos</li>
+                            <li><i class="fa fa-times text-danger"></i> Atmos</li>
                             <li><i class="fa fa-times text-danger"></i> 3D</li>
                         </ul>
                         <a href="#" class="btn btn-primary">Binnenkort beschikbaar</a>
@@ -42,7 +42,7 @@
                             <li><i class="fa fa-check text-primary"></i> Dolby 5.1</li>
                             <li><i class="fa fa-check text-primary"></i> Dolby 7.1</li>
                             <li><i class="fa fa-check text-primary"></i> Laser Ultra</li>
-                            <li><i class="fa fa-times text-danger"></i> Amtos</li>
+                            <li><i class="fa fa-times text-danger"></i> Atmos</li>
                             <li><i class="fa fa-times text-danger"></i> 3D</li>
                         </ul>
                         <a href="#" class="btn btn-primary">Binnenkort beschikbaar</a>
@@ -60,7 +60,7 @@
                             <li><i class="fa fa-check text-primary"></i> Dolby 5.1</li>
                             <li><i class="fa fa-check text-primary"></i> Dolby 7.1</li>
                             <li><i class="fa fa-check text-primary"></i> Laser Ultra</li>
-                            <li><i class="fa fa-check text-primary"></i> Amtos</li>
+                            <li><i class="fa fa-check text-primary"></i> Atmos</li>
                             <li><i class="fa fa-check text-primary"></i> 3D</li>
                         </ul>
                         <a href="#" class="btn btn-primary">Binnenkort beschikbaar</a>
