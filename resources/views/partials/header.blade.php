@@ -14,7 +14,7 @@
                 <a href="/over-ons" class="nav-link mr-3"><i class="far fa-address-card"></i> Over ons</a>
             </li>
             <li class="nav-item">
-                <a href="/over-ons" class="nav-link mr-3"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="/contact" class="nav-link mr-3"><i class="fas fa-envelope"></i> Contact</a>
             </li>
             @guest
             @else
