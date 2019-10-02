@@ -10,7 +10,6 @@
                 </ul>
             </div>
             <div class="col-md-4">
-                <h3>Over</h3>
                 <ul class="list-unstyled">
                     <li><a href="/privacy-en"><i class="fas fa-user-secret"></i>  Privacy Policy</a></li>
                     <li><a href="/terms"><i class="fas fa-bookmark"></i> Terms & Conditions</a></li>
