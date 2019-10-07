@@ -54,7 +54,7 @@ class BioscoopController extends Controller
             "content" => "required",
             "slug" => "required",
             "name" => "required",
-            "photo" => "required|image",
+            "photos.*" => "required|image",
             "phone" => "required",
         ]);
 
@@ -68,10 +68,12 @@ class BioscoopController extends Controller
             "phone" => $request->input("phone"),
         ]);
 
-        BioscoopPhoto::create([
-            "bioscoop_id" => $bios->id,
-            "file" => Storage::disk('images')->put('/', $request->file('photo'))
-        ]);
+        foreach ($request->file('photos') ?? [] as $photo) {
+            BioscoopPhoto::create([
+                "bioscoop_id" => $bios->id,
+                "file" => Storage::disk('images')->put('/', $photo)
+            ]);
+        }
 
         $users = $request->input("users");
         if ($users) {
@@ -107,7 +109,7 @@ class BioscoopController extends Controller
             "content" => "required",
             "slug" => "required",
             "name" => "required",
-            "photo" => "image",
+            "photos.*" => "image",
             "phone" => "required",
         ]);
 
@@ -124,19 +126,17 @@ class BioscoopController extends Controller
             "name" => $request->input("name"),
         ]);
 
-        if ($request->file('photo')) {
-            $photo = BioscoopPhoto::where('bioscoop_id', $bios->id)->first();
-            if ($photo) {
-                Storage::disk('images')->delete($photo->file);
-                $photo->update([
-                    "file" => Storage::disk('images')->put('/', $request->file('photo'))
-                ]);
-            } else {
-                BioscoopPhoto::create([
-                    "bioscoop_id" => $bios->id,
-                    "file" => Storage::disk('images')->put('/', $request->file('photo'))
-                ]);
-            }
+        foreach ($request->input('delete') ?? [] as $deletable) {
+            $path = BioscoopPhoto::find($deletable);
+            Storage::disk('images')->delete($path->file);
+            $path->delete();
+        }
+
+        foreach ($request->file('photos') ?? [] as $photo) {
+            BioscoopPhoto::create([
+                "bioscoop_id" => $bios->id,
+                "file" => Storage::disk('images')->put('/', $photo)
+            ]);
         }
 
         if (Auth::user()->isAdmin()) {

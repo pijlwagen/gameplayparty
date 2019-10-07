@@ -99,9 +99,9 @@
                     <hr>
                     <div class="form-group">
                         <label for="photo">Foto</label>
-                        <input type="file" name="photo" id="photo" value="{{ old('photo') }}"
-                               class="form-control-file @error('photo') is-invalid @enderror">
-                        @error('photo')
+                        <input type="file" name="photos[]" id="photo" multiple
+                               class="form-control-file @error('photos') is-invalid @enderror">
+                        @error('photos')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
