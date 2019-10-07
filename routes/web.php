@@ -14,6 +14,7 @@
 Route::group(['prefix' => '/'], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/bioscopen/{slug}', 'Beheer\BioscoopController@view')->name('bios.show');
+    Route::get('/bioscopen/{slug}/reserveren', 'ReservationController@create')->name('bios.reservations.create');
     Route::post('/contact', 'HomeController@contact')->name('contact');
 
     Route::group(['prefix' => '/auth'], function () {
