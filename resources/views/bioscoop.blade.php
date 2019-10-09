@@ -17,8 +17,11 @@
             </div>
             <div class="col-md-4 bg-dark rounded" style="color: #fff;">
                 <div class="my-3">
-                    <img src="{{ asset('images/' . $bios->photos()->first()->file) }}" alt=""
-                         class="img-fluid rounded mb-3">
+                    <div class="fotorama">
+                        @foreach($bios->photos() as $image)
+                            <img src="{{ asset('images/' . $image->file) }}" alt="Foto">
+                        @endforeach
+                    </div>
                     <span><i class="fas fa-home"></i> {{ $bios->address }}</span><br>
                     <span><i class="fas fa-map-marker-alt"></i> {{ $bios->zip }} {{ $bios->city }}</span><br>
                     <span><i class="fas fa-phone"></i> {{ $bios->phone }}</span><br>

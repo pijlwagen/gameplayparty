@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('libs/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('libs/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
     <link rel="icon" href="{{ asset('icon.png') }}">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
@@ -33,6 +34,7 @@
 <script src="{{ asset('libs/jquery.js') }}"></script>
 <script src="{{ asset('libs/popper.min.js') }}"></script>
 <script src="{{ asset('libs/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 @stack('js')
 </body>
 </html>

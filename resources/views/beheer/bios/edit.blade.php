@@ -99,14 +99,17 @@
                     <hr>
                     <div class="form-group">
                         <label for="photo">Foto</label>
-                        <input type="file" name="photo" id="photo"
-                               class="form-control-file @error('photo') is-invalid @enderror">
+                        <input type="file" name="photos[]" id="photos" multiple
+                               class="form-control-file @error('photos') is-invalid @enderror">
                         @error('photo')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
-                        <img src="{{ asset('images/'.$bios->photos()->first()->file) }}" style="max-width: 50%" alt="Foto" class="img-fluid my-3">
+                        @foreach($bios->photos() as $photo)
+                            <img src="{{ asset('images/'. $photo->file) }}" style="max-width: 150px" alt="Foto" class="img-fluid my-3">
+                            <input type="checkbox" value="{{ $photo->id }}" name="delete[]">
+                        @endforeach
                     </div>
                     <hr>
                     @if (Auth::user()->isAdmin())

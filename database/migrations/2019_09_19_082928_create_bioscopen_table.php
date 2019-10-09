@@ -22,6 +22,7 @@ class CreateBioscopenTable extends Migration
             $table->string('phone', 256);
             $table->longText('description');
             $table->string('slug', 256);
+            $table->boolean('reservations')->default(false);
             $table->timestamps();
         });
     }
