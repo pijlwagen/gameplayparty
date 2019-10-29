@@ -60,7 +60,7 @@
                             <select type="number" name="dolby" id="dolby"
                                     class="form-control @error('dolby') is-invalid @enderror">
                                 <option value="5.1">Dolby 5.1</option>
-                                <option value="7" {{ old('dolby', $zaal->dolby) === '7' ? 'selected' : '' }}>Dolby 7</option>
+                                <option value="7.1" {{ old('dolby', $zaal->dolby) === '7.1' ? 'selected' : '' }}>Dolby 7.1</option>
                             </select>
                             @error('dolby')
                             <div class="invalid-feedback">

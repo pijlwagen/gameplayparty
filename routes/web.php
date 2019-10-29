@@ -30,6 +30,7 @@ Route::group(['prefix' => '/'], function () {
     });
 
     Route::group(['prefix' => '/beheer', 'middleware' => ['editor']], function () {
+        Route::get('/', 'Beheer\AdminController@index')->middleware(['admin'])->name('admin.index');
         Route::group(['prefix' => '/cms', 'middleware' => ['admin']], function () {
             Route::get('/', 'Beheer\CmsController@index')->name('cms.index');
             Route::get('/nieuw', 'Beheer\CmsController@create')->name('cms.nieuw');

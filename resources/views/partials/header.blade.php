@@ -26,6 +26,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             @if (Auth::user()->isAdmin())
                                 <a class="dropdown-item" href="{{ route('cms.index') }}">Content Management Systeem</a>
+                                <a class="dropdown-item" href="{{ route('admin.index') }}">Overzicht</a>
                             @endif
                                 <a class="dropdown-item" href="{{ route('bios.index') }}">Bioscopen</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
