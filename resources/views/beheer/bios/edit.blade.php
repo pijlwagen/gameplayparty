@@ -107,7 +107,8 @@
                         </div>
                         @enderror
                         @foreach($bios->photos() as $photo)
-                            <img src="{{ asset('images/'. $photo->file) }}" style="max-width: 150px" alt="Foto" class="img-fluid my-3">
+                            <img src="{{ asset('images/'. $photo->file) }}" style="max-width: 150px" alt="Foto"
+                                 class="img-fluid my-3">
                             <input type="checkbox" value="{{ $photo->id }}" name="delete[]">
                         @endforeach
                     </div>
@@ -119,7 +120,8 @@
                                     class="form-control @error('users') is-invalid @enderror">
                                 @php($busers = $bios->users())
                                 @foreach($users as $user)
-                                    <option value="{{ $user->id }}" {{ $busers->where('user_id', $user->id)->first() ? 'selected' : '' }}>{{ $user->name }}</option>
+                                    <option
+                                        value="{{ $user->id }}" {{ $busers->where('user_id', $user->id)->first() ? 'selected' : '' }}>{{ $user->name }}</option>
                                 @endforeach
                             </select>
                             @error('users')
@@ -135,6 +137,39 @@
                         <a href="javascript:history.back()" class="btn btn-warning">Terug</a>
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-header">
+                <h3>Zalen</h3>
+            </div>
+            <div class="card-body">
+                <a href="{{ route('zaal.create', $bios->id) }}" class="btn btn-primary float-right">Zaal toevoegen</a>
+                <table class="table table-hover table-borderless">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Naam</th>
+                        <th>Acties</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($zalen as $zaal)
+                        <tr>
+                            <th>{{ $zaal->id }}</th>
+                            <td>{{ $zaal->name }}</td>
+                            <td>
+                                <a href="{{ route('zaal.edit', [$bios->id, $zaal->id]) }}" class="mr-2"><i class="fas fa-edit"></i></a>
+                                @if (Auth::user()->isAdmin())
+                                    <form action="{{ route('zaal.delete', [$bios->id, $zaal->id]) }}" method="POST" id="delete-{{ $zaal->id }}" hidden>@csrf</form>
+                                    <a href="#" onclick="event.preventDefault(); return confirm('Weet u zeker dat u deze zaal wilt verwijderen?') ? $('#delete-{{ $zaal->id }}').submit() : false"><i
+                                            class="fas fa-trash text-danger"></i></a>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -16,8 +16,14 @@ class CreateZalenTable extends Migration
         Schema::create('zalen', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('bioscoop_id');
+            $table->string('name', 512);
+            $table->string('slug', 512);
             $table->integer('seats')->default(0);
             $table->integer('handicapped_seats')->default(0);
+            $table->boolean('atmos')->default(false);
+            $table->boolean('3d')->default(false);
+            $table->boolean('ultra')->default(false);
+            $table->string('dolby')->default('5.1');
             $table->timestamps();
         });
     }

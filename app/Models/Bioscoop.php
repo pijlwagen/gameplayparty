@@ -27,4 +27,9 @@ class Bioscoop extends Model
     {
         return $this->hasMany(BioscoopPhoto::class, 'bioscoop_id', 'id')->get();
     }
+
+    public function zalen()
+    {
+        return $this->hasMany(Room::class, 'bioscoop_id', 'id')->get();
+    }
 }

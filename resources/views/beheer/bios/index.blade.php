@@ -12,7 +12,7 @@
                     <a href="{{ route('bios.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i>
                         Nieuwe bioscoop</a>
                 @endif
-                <table class="table table-striped table-hover table-borderless">
+                <table class="table table-hover table-borderless">
                     <thead>
                     <tr>
                         <th>ID</th>

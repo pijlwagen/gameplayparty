@@ -10,7 +10,7 @@
             <div class="card-body">
                 <a href="{{ route('cms.nieuw') }}" class="btn btn-primary float-right"><i class="fas fa-plus"></i>
                     Nieuwe pagina</a>
-                <table class="table table-striped table-hover table-borderless">
+                <table class="table table-hover table-borderless">
                     <thead>
                     <tr>
                         <th>ID</th>

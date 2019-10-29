@@ -11,6 +11,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,10 +21,27 @@ class BioscoopController extends Controller
     {
         $bios = Bioscoop::where('slug', $request->slug)->first();
         if (!$bios) return abort(404);
+        $times = collect(DB::select(DB::raw("SELECT t.id AS id, z.name as zaal, b.name as bios, t.start as 'start', t.end as 'end' FROM bioscopen b INNER JOIN zalen z on z.bioscoop_id = b.id INNER JOIN timelocks t on t.zaal_id = z.id WHERE b.id = :id AND t.available = 1 AND t.start > NOW()"),
+            [
+                'id' => $bios->id,
+            ]
+        ));
         return view("bioscoop", [
-            'bios' => $bios
+            'bios' => $bios,
+            'zalen' => $bios->zalen(),
+            'times' => $times,
         ]);
     }
+
+//    public function zalen(Request $request)
+//    {
+//        $bios = Bioscoop::where('slug', $request->slug)->first();
+//        if (!$bios) return abort(404);
+//        return view('zalen', [
+//            'zalen' => $bios->zalen(),
+//            'bios' => $bios
+//        ]);
+//    }
 
     public function index()
     {
@@ -94,9 +112,11 @@ class BioscoopController extends Controller
         $bios = Bioscoop::find($request->id);
         if (!$bios) return abort(404);
         $users = Role::where("name", "Redacteur")->first()->users();
+        $zalen = $bios->zalen();
         return view('beheer.bios.edit', [
             'users' => $users,
             'bios' => $bios,
+            'zalen' => $zalen
         ]);
     }
 

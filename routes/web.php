@@ -14,8 +14,12 @@
 Route::group(['prefix' => '/'], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/bioscopen/{slug}', 'Beheer\BioscoopController@view')->name('bios.show');
-    Route::get('/bioscopen/{slug}/reserveren', 'ReservationController@create')->name('bios.reservations.create');
+    Route::get('/bioscopen/{slug}/reserveren', 'ReservationController@show')->name('bios.reservations.show');
+    Route::post('/bioscopen/{slug}/reserveren', 'ReservationController@store')->name('bios.reservations.store');
+    Route::get('/bioscopen/{slug}/reserveren/{id}/betalen', 'ReservationController@create')->name('bios.reservations.pay');
+    Route::get('/bioscopen/{slug}/zalen', 'Beheer\BioscoopController@zalen')->name('bios.zalen');
     Route::post('/contact', 'HomeController@contact')->name('contact');
+    Route::get('/invoice', 'ReservationController@invoice')->name('invoice');
 
     Route::group(['prefix' => '/auth'], function () {
         Route::get('inloggen', 'Auth\LoginController@showLoginForm')->name('login');
@@ -41,6 +45,20 @@ Route::group(['prefix' => '/'], function () {
             Route::get('/{id}/aanpassen', 'Beheer\BioscoopController@edit')->name('bios.edit');
             Route::post('/{id}/aanpassen', 'Beheer\BioscoopController@update')->name('bios.update');
             Route::post('/{id}/verwijderen', 'Beheer\BioscoopController@delete')->middleware('admin')->name('bios.delete');
+            Route::group(['prefix' => '/{id}/zalen'], function () {
+                Route::get('/nieuw', 'Beheer\ZaalController@create')->name('zaal.create');
+                Route::post('/nieuw', 'Beheer\ZaalController@store')->name('zaal.store');
+                Route::get('/{zaalId}/aanpassen', 'Beheer\ZaalController@edit')->name('zaal.edit');
+                Route::post('/{zaalId}/aanpassen', 'Beheer\ZaalController@update')->name('zaal.update');
+                Route::post('/{zaalId}/verwijderen', 'Beheer\ZaalController@delete')->name('zaal.delete');
+                Route::group(['prefix' => '/{zaalId}/tijdslot'], function () {
+                    Route::get('/nieuw', 'Beheer\TimeController@create')->name('time.create');
+                    Route::post('/nieuw', 'Beheer\TimeController@store')->name('time.store');
+                    Route::get('/{tID}/aanpassen', 'Beheer\TimeController@edit')->name('time.edit');
+                    Route::post('/{tID}/aanpassen', 'Beheer\TimeController@update')->name('time.update');
+                    Route::post('/{tID}/verwijderen', 'Beheer\TimeController@delete')->name('time.delete');
+                });
+            });
         });
     });
 

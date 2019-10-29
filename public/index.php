@@ -8,6 +8,7 @@
  */
 
 define('LARAVEL_START', microtime(true));
+$result = setlocale(LC_TIME, 'nl_NL');
 
 /*
 |--------------------------------------------------------------------------
