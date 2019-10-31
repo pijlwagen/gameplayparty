@@ -39,7 +39,7 @@
                     <select name="timeFrame" id="time" class="form-control">
                         @foreach($times as $time)
                             @php
-                                $date = \Carbon\Carbon::parse($time->start)->format('l m F Y');
+                                $date = \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y');
                                 $start = \Carbon\Carbon::parse($time->start)->format('H:i');
                                 $end = \Carbon\Carbon::parse($time->end)->format('H:i');
                             @endphp
@@ -57,8 +57,8 @@
         <hr>
         <div class="row">
             @foreach($zalen as $zaal)
-                <div class="col-md-6">
-                    <div class="card">
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm">
                         <div class="card-header">
                             <b>{{ $zaal->name }}</b>
                         </div>

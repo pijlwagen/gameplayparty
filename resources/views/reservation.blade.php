@@ -94,10 +94,10 @@
                     <h3>Tijdslot</h3>
                     <div class="form-group">
                         <label for="time">Selecteer een tijd</label>
-                        <select name="time" id="time" class="form-control" v-on:change="pricePerPerson()">
+                        <select name="time" id="time" class="form-control @error('time') is-invalid @enderror" v-on:change="pricePerPerson()">
                             @foreach($times as $time)
                                 @php
-                                    $date = \Carbon\Carbon::parse($time->start)->format('l d F Y');
+                                    $date = \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y');;
                                     $start = \Carbon\Carbon::parse($time->start)->format('H:i');
                                     $end = \Carbon\Carbon::parse($time->end)->format('H:i');
                                 @endphp
@@ -106,6 +106,11 @@
                                     <b>{{ $time->zaal }}: </b>{{ $date }} van {{ $start }} tot {{ $end }}</option>
                             @endforeach
                         </select>
+                        @error('time')
+                        <div class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <hr>
                     <h3>Aantal personen</h3>
@@ -115,7 +120,7 @@
                             <td>&euro;<% tickets.normal.price.toFixed(2) %></td>
                             <td class="w-25">
                                 <input type="number" class="form-control" name="normal" v-model="tickets.normal.amount"
-                                       v-on:keyup="subTotal()" min="0">
+                                       v-on:keyup="subTotal()" min="0" onclick="this.select();">
                             </td>
                         </tr>
                         <tr>
@@ -123,7 +128,7 @@
                             <td>&euro;<% tickets.kids.price.toFixed(2) %></td>
                             <td class="w-25">
                                 <input type="number" class="form-control" name="kids" v-model="tickets.kids.amount"
-                                       v-on:keyup="subTotal()" min="0">
+                                       v-on:keyup="subTotal()" min="0" onclick="this.select();">
                             </td>
                         </tr>
                         <tr>
@@ -131,7 +136,7 @@
                             <td>&euro;<% tickets.youth.price.toFixed(2) %></td>
                             <td class="w-25">
                                 <input type="number" class="form-control" name="youth" v-model="tickets.youth.amount"
-                                       v-on:keyup="subTotal()" min="0">
+                                       v-on:keyup="subTotal()" min="0" onclick="this.select();">
                             </td>
                         </tr>
                         <tr>
@@ -139,14 +144,14 @@
                             <td>&euro;<% tickets.elder.price.toFixed(2) %></td>
                             <td class="w-25">
                                 <input type="number" class="form-control" name="elder" v-model="tickets.elder.amount"
-                                       v-on:keyup="subTotal()" min="0">
+                                       v-on:keyup="subTotal()" min="0" onclick="this.select();">
                             </td>
                         </tr>
                         <tr>
                             <td class="w-50">Studenten, CJP & BankGiro Loterij VIP-KAART</td>
                             <td>&euro;<% tickets.special.price.toFixed(2) %></td>
                             <td class="w-25">
-                                <input type="number" class="form-control" name="special"
+                                <input type="number" class="form-control" name="special" onclick="this.select();"
                                        v-model="tickets.special.amount" v-on:keyup="subTotal()" min="0">
                             </td>
                         </tr>
@@ -162,7 +167,7 @@
                         </tr>
                     </table>
                     <div class="form-group">
-                        <button class="btn btn-primary float-right">Naar betaling</button>
+                        <button class="btn btn-primary float-right" v-bind:class="{ disabled: !isValid() }" v-bind:disabled="!isValid()">Naar betaling</button>
                     </div>
                 </form>
             </div>
@@ -208,20 +213,26 @@
                 tickets: {
                     handler: function () {
                         let t = this.tickets;
-                        if (t.normal.amount < 0) t.normal.amount = 0;
-                        if (t.elder.amount < 0) t.elder.amount = 0;
-                        if (t.kids.amount < 0) t.kids.amount = 0;
-                        if (t.special.amount < 0) t.special.amount = 0;
-                        if (t.youth.amount < 0) t.youth.amount = 0;
+                        if (t.normal.amount < 0 || t.normal.amount === '') t.normal.amount = 0;
+                        if (t.elder.amount < 0 || t.elder.amount === '') t.elder.amount = 0;
+                        if (t.kids.amount < 0 || t.kids.amount === '') t.kids.amount = 0;
+                        if (t.special.amount < 0 || t.special.amount === '') t.special.amount = 0;
+                        if (t.youth.amount < 0 || t.youth.amount === '') t.youth.amount = 0;
                     },
                     deep: true,
                 }
             },
             created: function () {
-                this.pricePP = parseInt($('#time option:selected').attr('data-price'));
-
+                this.pricePP = parseInt($('#time option:selected').attr('data-price') || 0);
             },
             methods: {
+                isValid: function() {
+                    if (this.tickets.total <= 0) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
                 pricePerPerson: function () {
                     this.pricePP = parseInt($('#time option:selected').attr('data-price'));
                 },

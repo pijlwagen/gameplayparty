@@ -49,6 +49,8 @@ class ReservationController extends Controller
             'special' => 'numeric',
         ]);
 
+
+
         $time = Timelock::find($request->input('time'));
         $bios = Bioscoop::where('slug', $request->slug)->first();
         if (!$bios) return abort(404);

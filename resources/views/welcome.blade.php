@@ -13,60 +13,38 @@
     <div class="container">
         {!! $page->render() !!}
         <div class="row my-3">
-            <div class="col-md-4 mb-3">
-                <div class="card ad shadow-lg">
-                    <div class="card-body text-center">
-                        <h1>1 uur</h1>
-                        <p>Kleine omschrijving over wat dit tijdslot inhoud. Exclusief fietsenstalling. Dit komt 
-                            voor volgende sprint maar is nu opvulling.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fa fa-check text-primary"></i> Laser</li>
-                            <li><i class="fa fa-check text-primary"></i> Dolby 5.1</li>
-                            <li><i class="fa fa-check text-primary"></i> Dolby 7.1</li>
-                            <li><i class="fa fa-times text-danger"></i> Laser Ultra</li>
-                            <li><i class="fa fa-times text-danger"></i> Atmos</li>
-                            <li><i class="fa fa-times text-danger"></i> 3D</li>
-                        </ul>
-                        <a href="#" class="btn btn-primary">Binnenkort beschikbaar</a>
+            @if ($times->first())
+                @foreach($times as $time)
+                    <div class="col-md-4 mb-3">
+                        <div class="card ad shadow-lg">
+                            <div class="card-body text-center">
+                                <h4>{{ $time->bios }}</h4>
+                                <strong>{{ \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B') }} van {{ \Carbon\Carbon::parse($time->start)->format('H:i') }} tot {{ \Carbon\Carbon::parse($time->end)->format('H:i') }}</strong>
+                                <p></p>
+                                <ul class="list-unstyled">
+                                    @if ($time->atmos)
+                                        <li><i class="fa fa-check text-primary"></i> Atmos</li>
+                                    @endif
+                                    @if ($time->{'3d'})
+                                        <li><i class="fa fa-check text-primary"></i> 3D</li>
+                                    @endif
+                                    @if ($time->ultra)
+                                        <li><i class="fa fa-check text-primary"></i> Laser Ultra</li>
+                                    @else
+                                        <li><i class="fa fa-check text-primary"></i> Laser</li>
+                                    @endif
+                                    <li><i class="fa fa-check text-primary"></i> Dolby {{ $time->dolby }}</li>
+                                </ul>
+                                <a href="{{ route('bios.reservations.show', [$time->biosID]) }}?timeFrame={{ $time->id }}" class="btn btn-primary">Reserveren</a>
+                            </div>
+                        </div>
                     </div>
+                @endforeach
+            @else
+                <div class="text-center w-100 my-5">
+                    <h3>Er zijn geen tijden beschikbaar.</h3>
                 </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card ad shadow-lg">
-                    <div class="card-body text-center">
-                        <h1>2 uur</h1>
-                        <p>Kleine omschrijving over wat dit tijdslot inhoud. Exclusief fietsenstalling. Dit komt 
-                            voor volgende sprint maar is nu opvulling.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fa fa-check text-primary"></i> Laser</li>
-                            <li><i class="fa fa-check text-primary"></i> Dolby 5.1</li>
-                            <li><i class="fa fa-check text-primary"></i> Dolby 7.1</li>
-                            <li><i class="fa fa-check text-primary"></i> Laser Ultra</li>
-                            <li><i class="fa fa-times text-danger"></i> Atmos</li>
-                            <li><i class="fa fa-times text-danger"></i> 3D</li>
-                        </ul>
-                        <a href="#" class="btn btn-primary">Binnenkort beschikbaar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card ad shadow-lg">
-                    <div class="card-body text-center">
-                        <h1>3 uur</h1>
-                        <p>Kleine omschrijving over wat dit tijdslot inhoud. Exclusief fietsenstalling. Dit komt 
-                            voor volgende sprint maar is nu opvulling.</p>
-                        <ul class="list-unstyled">
-                            <li><i class="fa fa-check text-primary"></i> Laser</li>
-                            <li><i class="fa fa-check text-primary"></i> Dolby 5.1</li>
-                            <li><i class="fa fa-check text-primary"></i> Dolby 7.1</li>
-                            <li><i class="fa fa-check text-primary"></i> Laser Ultra</li>
-                            <li><i class="fa fa-check text-primary"></i> Atmos</li>
-                            <li><i class="fa fa-check text-primary"></i> 3D</li>
-                        </ul>
-                        <a href="#" class="btn btn-primary">Binnenkort beschikbaar</a>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 @stop

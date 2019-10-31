@@ -272,8 +272,8 @@
                 </div>
                 <div class="col-6 bob">
                     <strong>GPP-{{ $reservation->id }}</strong><br>
-                    {{ \Carbon\Carbon::parse($payment->created_at)->format('d F, Y') }}<br>
-                    {{ \Carbon\Carbon::parse($time->start)->format('d F, Y') }}<br>
+                    {{ \Carbon\Carbon::parse($payment->created_at)->formatLocalized('%e %B, %Y') }}<br>
+                    {{ \Carbon\Carbon::parse($time->start)->formatLocalized('%e %B, %Y') }}<br>
                     {{ \Carbon\Carbon::parse($time->start)->format('H:i') }}
                     - {{ \Carbon\Carbon::parse($time->end)->format('H:i') }}<br>
                     {{ $zaal->name }}<br>
@@ -284,46 +284,46 @@
         <div class="col-4 odd"><strong>Dienst</strong></div>
         <div class="col-3 odd"><strong>Tarief</strong></div>
         <div class="col-5 odd"><strong>Bedrag</strong></div>
-        <div class="col-4 bob"><strong>GamePlayParty entree</strong><br>{{ \Carbon\Carbon::parse($time->start)->format('l d F, Y') }}</div>
+        <div class="col-4 bob"><strong>GamePlayParty entree</strong><br>{{ \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y') }}</div>
         <div class="col-3 bob"><strong>Personen:</strong> {{ $people }}  @ &euro;{{ $time->price }}<br><br></div>
         <div class="col-5 bob">&euro;{{ number_format($people * $time->price, 2, ',', '.') }}<br><br></div>
         @if ($reservation->kids > 0)
-            <div class="col-4 bob"><strong>GamePlayParty</strong><br>{{ \Carbon\Carbon::parse($time->start)->format('l d F, Y') }}</div>
+            <div class="col-4 bob"><strong>GamePlayParty</strong><br>{{ \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y') }}</div>
             <div class="col-3 bob"><strong>Kinderen t/m 11 jaar:</strong> {{ $reservation->kids }} @ &euro;6,50</div>
             <div class="col-5 bob">&euro;{{ number_format($reservation->kids * 6.50, 2, ',', '.') }}<br><br></div>
         @endif
         @if ($reservation->youth > 0)
-            <div class="col-4 bob"><strong>GamePlayParty</strong><br>{{ \Carbon\Carbon::parse($time->start)->format('l d F, Y') }}</div>
+            <div class="col-4 bob"><strong>GamePlayParty</strong><br>{{ \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y') }}</div>
             <div class="col-3 bob"><strong>Jeugd 12 t/m 17 jaar:</strong> {{ $reservation->youth }} @ &euro;8,50</div>
             <div class="col-5 bob">&euro;{{ number_format($reservation->youth * 8.5, 2, ',', '.') }}<br><br></div>
         @endif
         @if ($reservation->normal > 0)
-            <div class="col-4 bob"><strong>GamePlayParty</strong><br>{{ \Carbon\Carbon::parse($time->start)->format('l d F, Y') }}</div>
+            <div class="col-4 bob"><strong>GamePlayParty</strong><br>{{ \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y') }}</div>
             <div class="col-3 bob"><strong>Normaal:</strong> {{ $reservation->normal }} @ &euro;10,80<br><br></div>
             <div class="col-5 bob">&euro;{{ number_format($reservation->normal * 10.80, 2, ',', '.') }}<br><br></div>
         @endif
         @if ($reservation->elder > 0)
-            <div class="col-4 bob"><strong>GamePlayParty</strong><br>{{ \Carbon\Carbon::parse($time->start)->format('l d F, Y') }}</div>
+            <div class="col-4 bob"><strong>GamePlayParty</strong><br>{{ \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y') }}</div>
             <div class="col-3 bob"><strong>65 Plus:</strong> {{ $reservation->elder }} @ &euro;9,00</div>
             <div class="col-5 bob">&euro;{{ number_format($reservation->elder * 9, 2, ',', '.') }}<br><br></div>
         @endif
         @if ($reservation->special > 0)
-            <div class="col-4 bob"><strong>GamePlayParty</strong><br>{{ \Carbon\Carbon::parse($time->start)->format('l d F, Y') }}</div>
+            <div class="col-4 bob"><strong>GamePlayParty</strong><br>{{ \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y') }}</div>
             <div class="col-3 bob"><strong>Studenten, CJP & BankGiro Loterij VIP-KAART:</strong> {{ $reservation->special }} @ &euro;8,70</div>
             <div class="col-5 bob">&euro;{{ number_format($reservation->special * 8.7, 2, ',', '.') }}<br><br></div>
         @endif
         @if ($zaal->ultra)
-            <div class="col-4 bob"><strong>Laser ULTRA</strong><br>{{ \Carbon\Carbon::parse($time->start)->format('l d F, Y') }}</div>
+            <div class="col-4 bob"><strong>Laser ULTRA</strong><br>{{ \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y') }}</div>
             <div class="col-3 bob"><strong>Toeslag:</strong> {{ $people }} @ &euro;2,50<br><br></div>
             <div class="col-5 bob">&euro;{{ number_format($people * 2.50, 2, ',', '.') }}<br><br></div>
         @endif
         @if ($zaal->{'3d'})
-            <div class="col-4 bob"><strong>3D</strong><br>{{ \Carbon\Carbon::parse($time->start)->format('l d F, Y') }}</div>
+            <div class="col-4 bob"><strong>3D</strong><br>{{ \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y') }}</div>
             <div class="col-3 bob"><strong>Toeslag:</strong> {{ $people }} @ &euro;0,50<br><br></div>
             <div class="col-5 bob">&euro;{{ number_format($people * 0.50, 2, ',', '.') }}<br><br></div>
         @endif
         @if ($zaal->atmos)
-            <div class="col-4 bob"><strong>Dolby Atmos</strong><br>{{ \Carbon\Carbon::parse($time->start)->format('l d F, Y') }}</div>
+            <div class="col-4 bob"><strong>Dolby Atmos</strong><br>{{ \Carbon\Carbon::parse($time->start)->formatLocalized('%A %e %B, %Y') }}</div>
             <div class="col-3 bob"><strong>Toeslag:</strong> {{ $people }} @ &euro;1,50<br><br></div>
             <div class="col-5 bob">&euro;{{ number_format($people * 1.50, 2, ',', '.') }}<br><br></div>
         @endif
