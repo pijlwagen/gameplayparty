@@ -39,7 +39,7 @@ Route::group(['prefix' => '/'], function () {
             Route::post('/{id}/aanpassen', 'Beheer\CmsController@update')->name('cms.update');
             Route::post('/{id}/verwijderen', 'Beheer\CmsController@delete')->name('cms.delete');
         });
-        Route::group(['prefix' => '/bioscopen'], function () {
+        Route::group(['prefix' => '/bioscopen', 'middleware' => ['approved']], function () {
             Route::get('/', 'Beheer\BioscoopController@index')->name('bios.index');
             Route::get('/nieuw', 'Beheer\BioscoopController@create')->name('bios.create');
             Route::post('/nieuw', 'Beheer\BioscoopController@store')->name('bios.store');

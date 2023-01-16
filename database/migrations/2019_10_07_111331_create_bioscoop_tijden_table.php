@@ -14,7 +14,7 @@ class CreateBioscoopTijdenTable extends Migration
     public function up()
     {
         Schema::create('bioscoop_tijden', function (Blueprint $table) {
-            $table->bigInteger('bioscoop_id');
+            $table->foreignId('bioscoop_id')->references('id')->on('bioscopen')->onDelete('cascade');
             $table->integer('start');
             $table->integer('end');
             $table->integer('day');

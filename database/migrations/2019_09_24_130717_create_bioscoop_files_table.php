@@ -15,7 +15,7 @@ class CreateBioscoopFilesTable extends Migration
     {
         Schema::create('bioscoop_files', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('bioscoop_id');
+            $table->foreignId('bioscoop_id')->references('id')->on('bioscopen')->onDelete('cascade');
             $table->text('file');
             $table->timestamps();
         });

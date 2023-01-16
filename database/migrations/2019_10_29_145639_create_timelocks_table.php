@@ -15,7 +15,7 @@ class CreateTimelocksTable extends Migration
     {
         Schema::create('timelocks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('zaal_id');
+            $table->foreignId('zaal_id')->references('id')->on('zalen')->onDelete('cascade');
             $table->dateTime('start');
             $table->dateTime('end');
             $table->float('price');

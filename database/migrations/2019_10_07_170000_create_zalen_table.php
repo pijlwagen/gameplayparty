@@ -15,7 +15,7 @@ class CreateZalenTable extends Migration
     {
         Schema::create('zalen', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('bioscoop_id');
+            $table->foreignId('bioscoop_id')->references('id')->on('bioscopen')->onDelete('cascade');
             $table->string('name', 512);
             $table->string('slug', 512);
             $table->integer('seats')->default(0);

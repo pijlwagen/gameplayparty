@@ -15,8 +15,8 @@ class CreateBioscoopUsersTable extends Migration
     {
         Schema::create('bioscoop_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('bioscoop_id');
-            $table->bigInteger('user_id');
+            $table->foreignId('bioscoop_id')->references('id')->on('bioscopen')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
