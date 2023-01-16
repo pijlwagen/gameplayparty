@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('head')
-    <link rel="stylesheet" href="{{ asset('libs/quill/quill.snow.css') }}">
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 @endpush
 
 @section('content')

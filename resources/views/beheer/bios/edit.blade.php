@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('head')
-    <link rel="stylesheet" href="{{ asset('libs/quill/quill.snow.css') }}">
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -176,7 +176,7 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset('libs/quill/quill.js') }}"></script>
+        <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <script>
         document.getElementsByName('form').onkeypress = function (e) {
             var key = e.charCode || e.keyCode || 0;
